@@ -1,0 +1,14 @@
+version: "3"
+services:
+    mongo:
+        image: mongo
+        container_name: mongodb
+        restart: always
+        environment:
+            - MONGO_INITDB_DATABASE=radardb
+        ports:
+            # From container : To host
+            - 27017:27017
+        volumes:
+            # From host : To container
+            - ./mongodb/data:/data/db
