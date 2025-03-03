@@ -5,7 +5,7 @@ services:
         container_name: mongodb
         restart: always
         environment:
-            - MONGO_INITDB_DATABASE=radardb
+            - MONGO_INITDB_DATABASE=top-api-db
         ports:
             # From container : To host
             - 27017:27017

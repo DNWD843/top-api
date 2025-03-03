@@ -6,9 +6,17 @@ import { TopPageModule } from './top-page/top-page.module'
 import { ProductModule } from './product/product.module'
 import { ReviewModule } from './review/review.module'
 import { ConfigModule } from '@nestjs/config'
+import { MongooseModule } from '@nestjs/mongoose'
 
 @Module({
-    imports: [ConfigModule.forRoot(), AuthModule, TopPageModule, ProductModule, ReviewModule],
+    imports: [
+        ConfigModule.forRoot(),
+        AuthModule,
+        TopPageModule,
+        ProductModule,
+        ReviewModule,
+        MongooseModule.forRoot('mongodb://localhost:27017/top-api-db'),
+    ],
     controllers: [AppController],
     providers: [AppService],
 })
