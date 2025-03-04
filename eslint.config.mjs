@@ -31,7 +31,6 @@ export default tseslint.config(
       '@typescript-eslint/no-floating-promises': 'warn',
       '@typescript-eslint/no-unsafe-argument': 'warn',
       'semi': ['error', 'never'],
-      'indent': ['error', 4],
       'curly': ['error', 'all'],
       'max-len': ['error', {
         'code': 120,
