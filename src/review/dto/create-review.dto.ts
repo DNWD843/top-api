@@ -3,5 +3,5 @@ export class CreateReviewDto {
     readonly title: string
     readonly description: string
     readonly rating: number
-    readonly producrId: string
+    readonly productId: string
 }
