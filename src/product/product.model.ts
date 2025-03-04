@@ -23,7 +23,7 @@ export class ProductModel {
     oldPrice: number
     @Prop()
     credit: number
-    @Prop()
+    @Prop({ default: 0 })
     calculatedRating: number
     @Prop()
     description: string
