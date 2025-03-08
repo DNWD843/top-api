@@ -20,6 +20,6 @@ export class JwtStrategy extends PassportStrategy(jwt.Strategy) {
          * Этот метод объявлен, потому что он обязательный в классе.
          * Поэтому просто пробрасываем email
          */
-        return email
+        return { email }
     }
 }
