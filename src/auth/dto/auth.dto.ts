@@ -1,4 +1,9 @@
+import { IsString } from 'class-validator'
+
 export class AuthDto {
-    readonly login: string
-    readonly password: string
+    @IsString()
+    login: string
+
+    @IsString()
+    password: string
 }
