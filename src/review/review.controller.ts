@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, 
 import { CreateReviewDto } from './dto'
 import { ReviewService } from './review.service'
 import { REVIEW_NOT_FOUND } from './review.constants'
-import { JwtAuthGuard } from 'src/auth/guards'
+import { JwtAuthGuard } from '../auth/guards'
 
 @Controller('review')
 export class ReviewController {

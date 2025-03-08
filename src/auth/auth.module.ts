@@ -5,7 +5,7 @@ import { UserModel, UserSchema } from './user.model'
 import { AuthService } from './auth.service'
 import { JwtModule } from '@nestjs/jwt'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { getJWTConfig } from 'src/configs'
+import { getJWTConfig } from '../configs'
 import { PassportModule } from '@nestjs/passport'
 import { JwtStrategy } from './strategies'
 
