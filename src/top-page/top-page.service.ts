@@ -22,7 +22,32 @@ export class TopPageService {
 
     async findByCategory(firstCategory: TopLevelCategory) {
         // return this.topPageModel.find({ firstCategory }, { alias: 1, secondCategory: 1, title: 1 }).exec()
-        return this.topPageModel.find({ firstCategory }, 'alias secondCategory title').exec()
+        // or like this
+        // return this.topPageModel.find({ firstCategory }, 'alias secondCategory title').exec()
+        // *********************************************************************************************** //
+        // добавим группировку и агрегацию страниц:
+        // return this.topPageModel
+        //     .aggregate([
+        //         {
+        //             $match: { firstCategory },
+        //         },
+        //         {
+        //             $group: {
+        //                 _id: { secondCategory: '$secondCategory' }, // $secondCategory - доступно нам в артефакте от предыдущего шага пайпланаб _id - обязательное поле
+        //                 pages: { $push: { alias: '$alias', title: '$title' } }, // pages - [{ alias: 'page_alias', title: 'page_title' }]
+        //             },
+        //         },
+        //     ])
+        //     .exec()
+        // or like this
+        return this.topPageModel
+            .aggregate()
+            .match({ firstCategory })
+            .group({
+                _id: { secondCategory: '$secondCategory' },
+                pages: { $push: { alias: '$alias', title: '$title' } },
+            })
+            .exec()
     }
 
     async deleteById(id: string) {
