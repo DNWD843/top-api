@@ -15,26 +15,34 @@ class ProductCharacteristis {
 export class ProductModel {
     @Prop()
     image: string
+
     @Prop()
     title: string
+
     @Prop()
     price: number
+
     @Prop()
-    oldPrice: number
+    oldPrice?: number
+
     @Prop()
     credit: number
-    @Prop({ default: 0 })
-    calculatedRating: number
+
     @Prop()
     description: string
+
     @Prop()
     advantages: string
+
     @Prop()
     disAdvantages: string
+
     @Prop({ type: [String] })
     categories: string[]
+
     @Prop({ type: [String] })
     tags: string[]
+
     @Prop({ type: [ProductCharacteristis], _id: false })
     characteristics: ProductCharacteristis[]
 }
