@@ -1,4 +1,7 @@
+import { Transform } from 'class-transformer'
 import { IsNumber, IsString, Max, Min } from 'class-validator'
+import { Types } from 'mongoose'
+import { IsObjectId } from 'src/decorators'
 
 export class CreateReviewDto {
     @IsString()
@@ -15,6 +18,7 @@ export class CreateReviewDto {
     @IsNumber()
     rating: number
 
-    @IsString()
-    productId: string
+    @IsObjectId() // Кастомный декоратор для валидации ObjectId
+    @Transform(({ value }: { value: string }) => Types.ObjectId.createFromHexString(value)) // Преобразование строки в ObjectId
+    productId: Types.ObjectId
 }

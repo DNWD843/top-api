@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { ProductDocument, ProductModel } from './product.model'
 import { Model } from 'mongoose'
-import { CreateProductDto } from './dto'
+import { CreateProductDto, FindProductDto } from './dto'
+import { ReviewModel } from 'src/review/review.model'
 
 @Injectable()
 export class ProductService {
@@ -22,5 +23,36 @@ export class ProductService {
 
     async updateById(id: string, dto: CreateProductDto) {
         return this.productModel.findByIdAndUpdate(id, dto, { new: true }).exec()
+    }
+
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async findWithReviews(dto: FindProductDto) {
+        return this.productModel
+            .aggregate([
+                { $match: { categories: dto.category } },
+                { $sort: { _id: 1 } },
+                { $limit: dto.limit },
+                {
+                    $lookup: {
+                        from: 'reviewmodels',
+                        localField: '_id',
+                        foreignField: 'productId',
+                        as: 'reviews',
+                    },
+                },
+                {
+                    $addFields: {
+                        reviewCount: { $size: '$reviews' },
+                        reviewAvg: { $avg: '$reviews.rating' },
+                    },
+                },
+            ])
+            .exec() as unknown as Array<
+            ProductModel & {
+                reviews: ReviewModel[]
+                reviewCount: number
+                reviewAvg: number
+            }
+        >
     }
 }

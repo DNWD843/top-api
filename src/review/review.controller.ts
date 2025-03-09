@@ -8,7 +8,7 @@ import { JwtAuthGuard } from '../auth/guards'
 export class ReviewController {
     constructor(private readonly reviewService: ReviewService) {}
 
-    @UsePipes(new ValidationPipe())
+    @UsePipes(new ValidationPipe({ transform: true }))
     @Post('create')
     async create(@Body() dto: CreateReviewDto) {
         return await this.reviewService.create(dto)
