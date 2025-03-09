@@ -1,7 +1,7 @@
 import { Transform } from 'class-transformer'
 import { IsNumber, IsString, Max, Min } from 'class-validator'
 import { Types } from 'mongoose'
-import { IsObjectId } from 'src/decorators'
+import { IsObjectId } from '../../decorators'
 
 export class CreateReviewDto {
     @IsString()

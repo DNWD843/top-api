@@ -8,11 +8,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { getJWTConfig } from '../configs'
 import { PassportModule } from '@nestjs/passport'
 import { JwtStrategy } from './strategies'
+import { COLLECTION } from '../constants'
 
 @Module({
     controllers: [AuthController],
     imports: [
-        MongooseModule.forFeature([{ name: UserModel.name, schema: UserSchema }]),
+        MongooseModule.forFeature([{ name: UserModel.name, schema: UserSchema, collection: COLLECTION.USERS.NAME }]),
         ConfigModule,
         JwtModule.registerAsync({
             imports: [ConfigModule],

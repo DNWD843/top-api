@@ -43,8 +43,8 @@ export class CreateProductDto {
     @IsString({ each: true })
     tags: string[]
 
-    @IsArray()
-    @ValidateNested()
-    @Type(() => ProductCharacteristisDto)
+    @IsArray() // массив
+    @ValidateNested() // проверяй элементы массива как объекты
+    @Type(() => ProductCharacteristisDto) // которым назначается тип ProductCharacteristisDto
     characteristics: ProductCharacteristisDto[]
 }

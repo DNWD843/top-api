@@ -3,7 +3,8 @@ import { InjectModel } from '@nestjs/mongoose'
 import { ProductDocument, ProductModel } from './product.model'
 import { Model } from 'mongoose'
 import { CreateProductDto, FindProductDto } from './dto'
-import { ReviewModel } from 'src/review/review.model'
+import { ReviewModel } from '../review/review.model'
+import { COLLECTION } from '../constants'
 
 @Injectable()
 export class ProductService {
@@ -34,7 +35,7 @@ export class ProductService {
                 { $limit: dto.limit },
                 {
                     $lookup: {
-                        from: 'reviewmodels',
+                        from: COLLECTION.REVIEWS.NAME,
                         localField: '_id',
                         foreignField: 'productId',
                         as: 'reviews',
