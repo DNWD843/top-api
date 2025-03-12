@@ -3,10 +3,12 @@ import { FileUploadResponse } from './dto'
 import { format } from 'date-fns'
 import { path } from 'app-root-path'
 import { ensureDir, writeFile } from 'fs-extra'
+import * as sharp from 'sharp'
+import { MulterFile } from './multerFile.class'
 
 @Injectable()
 export class FilesService {
-    async saveFiles(files: Express.Multer.File[]): Promise<FileUploadResponse[]> {
+    async saveFiles(files: MulterFile[]): Promise<FileUploadResponse[]> {
         const fileFolderName = format(new Date(), 'yyyy-MM-dd')
         const uploafFolderName = `${path}/uploads/${fileFolderName}`
 
@@ -28,5 +30,9 @@ export class FilesService {
         }
 
         return response
+    }
+
+    convertToWebP(file: Buffer): Promise<Buffer> {
+        return sharp(file).webp().toBuffer()
     }
 }
