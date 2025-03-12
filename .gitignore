@@ -3,6 +3,7 @@
 /node_modules
 /build
 /mongodb
+/uploads
 
 # Logs
 logs

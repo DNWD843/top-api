@@ -27,6 +27,18 @@ export default tseslint.config(
   },
   {
     rules: {
+      "@typescript-eslint/no-unsafe-assignment": [
+        "error",
+        {
+          "ignoreTypes": ["Express.Multer.File"]
+        }
+      ],
+      "@typescript-eslint/no-unsafe-member-access": [
+        "error",
+        {
+          "ignoreTypes": ["Express.Multer.File"]
+        }
+      ],
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-floating-promises': 'warn',
       '@typescript-eslint/no-unsafe-argument': 'warn',
