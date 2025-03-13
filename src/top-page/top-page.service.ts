@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { TopLevelCategory, TopPageDocument, TopPageModel } from './top-page.model'
 import { Model } from 'mongoose'
-import { InjectModel } from '@nestjs/mongoose'
+import { InjectModel } from '@nestjs/mongoose';
 import { CreateTopPageDto } from './dto'
 
 @Injectable()
@@ -18,6 +18,10 @@ export class TopPageService {
 
     async findByAlias(alias: string) {
         return this.topPageModel.findOne({ alias }).exec()
+    }
+
+    async findAll() {
+        return this.topPageModel.find({}).exec()
     }
 
     async findByCategory(firstCategory: TopLevelCategory) {
