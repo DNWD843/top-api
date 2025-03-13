@@ -5,8 +5,6 @@ import { ConfigModule } from '@nestjs/config'
 
 @Module({
     imports: [TopPageModule, ConfigModule],
-    controllers: [SitemapController]
+    controllers: [SitemapController],
 })
-export class SitemapModule {
-
-}
+export class SitemapModule {}

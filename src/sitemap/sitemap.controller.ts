@@ -19,32 +19,35 @@ export class SitemapController {
     @Get('xml')
     @Header('Content-Type', 'text/xml')
     async sitemap() {
-        const formatString = 'yyyy-MM-dd\'T\'HH:mm:00.000xxx'
+        const formatString = 'yyyy-MM-dd"T"HH:mm:00.000xxx'
+
         let res = [
             {
-            loc: this.domain,
-            lastmod: format(addDays(new Date(), -1), formatString),
-            // lastmod: format(subDays(new Date(), 1), formatString) //  аналог
-            changefreq: 'daily',
-            priority: '1.0',
+                loc: this.domain,
+                lastmod: format(addDays(new Date(), -1), formatString),
+                // lastmod: format(subDays(new Date(), 1), formatString) //  аналог
+                changefreq: 'daily',
+                priority: '1.0',
             },
             {
                 loc: `${this.domain}/courses`,
                 lastmod: format(addDays(new Date(), -1), formatString),
                 changefreq: 'daily',
                 priority: '1.0',
-            }
+            },
         ]
 
         const pages = await this.topPageService.findAll()
-        res = res.concat(pages.map(page => ({
-            loc: `${this.domain}${CATEGORY_URL[page.firstCategory]}/${page.alias}`,
+        res = res.concat(
+            pages.map((page) => ({
+                loc: `${this.domain}${CATEGORY_URL[page.firstCategory]}/${page.alias}`,
                 lastmod: format(new Date(page.updatedAt ?? new Date()), formatString),
                 changefreq: 'weekly',
                 priority: '0.7',
-        })))
+            })),
+        )
         const builder = new Builder({
-            xmldec: { version: '1.0', encoding: 'UTF-8' }
+            xmldec: { version: '1.0', encoding: 'UTF-8' },
         })
 
         return builder.buildObject({
@@ -53,7 +56,7 @@ export class SitemapController {
                     xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
                 },
                 url: res,
-            }
+            },
         })
     }
 }
